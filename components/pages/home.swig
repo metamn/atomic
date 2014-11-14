@@ -1,5 +1,5 @@
 ---
-title: Home ahoy
+title: Home
 ---
 
 {% include "../structures/head.swig" %}

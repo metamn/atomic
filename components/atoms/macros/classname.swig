@@ -6,6 +6,6 @@ example:
   - output: this-is-a-string
 ---
 
-{% macro classname(string) %}
+{% macro classname(string) -%}
   {{ string | lower | replace(',', '') | replace('&', '') | replace("'", '') | replace('"', '') | replace(' ', '-') }}
-{% endmacro %}
+{%- endmacro %}
