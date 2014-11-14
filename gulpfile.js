@@ -64,6 +64,28 @@ var paths = {
 };
 
 
+
+gulp.task('yaml', function() {
+  return gulp.src('components/**/*.yml')
+    .pipe(data(function(file) {
+      var content = fm(String(file.contents));
+      file.contents = new Buffer(content.body);
+      return content.attributes;
+    }))
+    .pipe(swig({
+      defaults: {
+        cache: false
+      }
+    }))
+    .pipe(rename(function(path) {
+      path.dirname = path.dirname.replace('pages/styleguide', '');
+      path.basename = '_' + path.basename;
+      path.extname = '.scss';
+    }))
+    .pipe(gulp.dest(paths.components));
+});
+
+
 // Swig
 // - compiles a .swig file with YAML front matter into HTML
 gulp.task('swig', function() {
